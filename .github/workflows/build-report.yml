@@ -1,0 +1,45 @@
+name: Build Report
+
+on:
+  push:
+    paths:
+      - 'report/**'
+      - 'scripts/**'
+  pull_request:
+    paths:
+      - 'report/**'
+      - 'scripts/**'
+
+jobs:
+  validate-bib:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Regenerate references.bib from sources.txt
+        run: python3 scripts/generate_bib.py report/sources.txt /tmp/references.bib
+
+      - name: Check references.bib is up to date
+        run: |
+          if ! diff report/references.bib /tmp/references.bib; then
+            echo "::error::references.bib is out of date. Run: python3 scripts/generate_bib.py report/sources.txt report/references.bib"
+            exit 1
+          fi
+
+  build:
+    needs: validate-bib
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: report/main.tex
+          working_directory: .
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: report
+          path: report/main.pdf

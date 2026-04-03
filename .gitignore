@@ -1,0 +1,21 @@
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+
+# PDF output
+report/*.pdf
+
+# Bib cache
+.bib_cache
+
+# OS files
+.DS_Store

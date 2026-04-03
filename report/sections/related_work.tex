@@ -1,0 +1,14 @@
+\section{Related Work}
+
+\paragraph{Proof formats.}
+DRAT~\cite{wetzler2014drattrim} is the standard proof format for SAT, with verified checkers in Isabelle~\cite{lammich2019efficient} and CakeML~\cite{tan2021cakelpr}.
+SMT lacks an analogous standard~\cite{barbosa2023generating}; Alethe~\cite{schurr2021alethe} is the most widely adopted format, supported by cvc5~\cite{barbosa2022flexible} and veriT, with Carcara~\cite{andreotti2023carcara} serving as an independent checker and elaborator.
+However, Z3 and SMTInterpol use their own internal formats, and the SMT-COMP proof exhibition track ran without a mandated format before being discontinued after 2023.
+
+\paragraph{Proof reconstruction.}
+Hammer tools bridge ITPs and external provers through proof reconstruction~\cite{blanchette2016hammering}.
+Premise-based reconstruction, used by Sledgehammer~\cite{bhme2010sledgehammer, blanchette2013extending} and CoqHammer~\cite{czajka2018hammer}, discards the external proof and re-proves the goal using only the identified premises, failing when internal tactics cannot independently rediscover the proof.
+Step-by-step reconstruction replays the solver's proof certificate inside the ITP, and has been implemented for Alethe proofs in Isabelle/HOL~\cite{fleury2019reconstructing, schurr2021reliable, lachnitt2025improving}, Coq~\cite{ekici2017smtcoq, armand2011a}, Lambdapi~\cite{coltellacci2026reconstruction}, and Lean~\cite{mohamed2025leansmt}.
+Step-by-step Alethe reconstruction in Isabelle has reached high success rates after over a decade of development~\cite{lachnitt2025improving}, but this maturity has not transferred to other ITPs: lean-smt supports only a fraction of cvc5's proof rules~\cite{mohamed2025leansmt}, and SMTCoq cannot handle quantified formulas beyond the head position~\cite{barbosa2023challenges}.
+QuerySMT~\cite{clune2026hintbased} sidesteps rule coverage by extracting solver hints rather than replaying full proofs, but remains limited by semantic mismatches between SMT and ITP logics, such as type conflation and the inability to reconstruct inductive arguments.
+Across all approaches, nonlinear arithmetic, quantifier reasoning involving solver-internal Skolem constants, and AC normalization mismatches remain open challenges~\cite{barbosa2023challenges}.
