@@ -160,13 +160,13 @@ def load_cache(cache_path: Path) -> dict[str, str]:
     for line in cache_path.read_text().splitlines():
         if line.startswith("%%% "):
             if current_key and current_lines:
-                cache[current_key] = "\n".join(current_lines)
+                cache[current_key] = "\n".join(current_lines).strip()
             current_key = line[4:]
             current_lines = []
         else:
             current_lines.append(line)
     if current_key and current_lines:
-        cache[current_key] = "\n".join(current_lines)
+        cache[current_key] = "\n".join(current_lines).strip()
     return cache
 
 
