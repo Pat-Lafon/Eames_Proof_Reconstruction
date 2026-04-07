@@ -1,0 +1,10 @@
+unsat
+((set-logic QF_UF)
+(proof
+(let (($x33 (not q)))
+(let ((@x34 (asserted $x33)))
+(let ((@x24 (asserted p)))
+(let (($x29 (or q (not p))))
+(let ((@x32 (mp (asserted (=> p q)) (rewrite (= (=> p q) $x29)) $x29)))
+(unit-resolution (unit-resolution @x32 @x24 q) @x34 false))))))))
+

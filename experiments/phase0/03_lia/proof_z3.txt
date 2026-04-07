@@ -1,0 +1,15 @@
+unsat
+((set-logic QF_LIA)
+(proof
+(let ((?x40 (+ x y)))
+(let (($x44 (<= ?x40 0)))
+(let ((@x63 (rewrite (= $x44 $x44))))
+(let ((@x50 (monotonicity (rewrite (= (> ?x40 0) (not $x44))) (= (not (> ?x40 0)) (not (not $x44))))))
+(let ((@x54 (trans @x50 (rewrite (= (not (not $x44)) $x44)) (= (not (> ?x40 0)) $x44))))
+(let ((@x55 (mp (asserted (not (> ?x40 0))) @x54 $x44)))
+(let (($x36 (not (<= y 0))))
+(let ((@x39 (mp (asserted (> y 0)) (rewrite (= (> y 0) $x36)) $x36)))
+(let (($x28 (not (<= x 0))))
+(let ((@x31 (mp (asserted (> x 0)) (rewrite (= (> x 0) $x28)) $x28)))
+((_ th-lemma arith) (mp @x31 (rewrite (= $x28 $x28)) $x28) (mp @x39 (rewrite (= $x36 $x36)) $x36) (mp (mp @x55 @x63 $x44) @x63 $x44) false)))))))))))))
+

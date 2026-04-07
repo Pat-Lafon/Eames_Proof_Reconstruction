@@ -17,5 +17,12 @@ report/*.pdf
 # Bib cache
 .bib_cache
 
+# Environment / secrets
+.env
+
+# Python
+.venv/
+__pycache__/
+
 # OS files
 .DS_Store

@@ -1,0 +1,17 @@
+unsat
+(assume a0 (! (= a b) :named @p_1))
+(assume a1 (! (not (! (= (f a) (! (f b) :named @p_2)) :named @p_3)) :named @p_4))
+(step t0 (cl (not (! (= @p_4 false) :named @p_5)) (not @p_4) false) :rule equiv_pos2)
+(step t1 (cl @p_3) :rule cong :premises (a0))
+(step t2 (cl (! (= @p_2 @p_2) :named @p_6)) :rule refl)
+(step t3 (cl (= @p_3 @p_6)) :rule cong :premises (t1 t2))
+(step t4 (cl (= @p_4 (! (not @p_6) :named @p_7))) :rule cong :premises (t3))
+(step t5 (cl (! (= @p_6 true) :named @p_10)) :rule hole :args ("TRUST_THEORY_REWRITE" @p_10 2 6))
+(step t6 (cl (= @p_7 (! (not true) :named @p_8))) :rule cong :premises (t5))
+(step t7 (cl (! (= @p_8 false) :named @p_9)) :rule hole :args ("TRUST_THEORY_REWRITE" @p_9 1 7))
+(step t8 (cl (= @p_7 false)) :rule trans :premises (t6 t7))
+(step t9 (cl @p_5) :rule trans :premises (t4 t8))
+(step t10 (cl false) :rule resolution :premises (t0 t9 a1))
+(step t11 (cl (not false)) :rule false)
+(step t12 (cl) :rule resolution :premises (t10 t11))
+

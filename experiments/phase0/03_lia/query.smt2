@@ -1,0 +1,10 @@
+; Lean goal: example (x y : Int) (h1 : x > 0) (h2 : y > 0) : x + y > 0
+; Encoding: assert x > 0, assert y > 0, assert not (x + y > 0)
+(set-logic QF_LIA)
+(declare-const x Int)
+(declare-const y Int)
+(assert (> x 0))
+(assert (> y 0))
+(assert (not (> (+ x y) 0)))
+(check-sat)
+(get-proof)

@@ -1,0 +1,5 @@
+unsat
+((set-logic LIA)
+(proof
+(asserted false)))
+

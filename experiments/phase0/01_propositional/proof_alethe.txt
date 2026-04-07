@@ -1,0 +1,8 @@
+unsat
+(assume a0 p)
+(assume a1 (! (=> p q) :named @p_1))
+(assume a2 (! (not q) :named @p_2))
+(step t0 (cl (not p) q) :rule implies :premises (a1))
+(step t1 (cl q) :rule resolution :premises (t0 a0))
+(step t2 (cl) :rule resolution :premises (t1 a2))
+

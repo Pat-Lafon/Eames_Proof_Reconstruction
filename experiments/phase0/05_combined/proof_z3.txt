@@ -1,0 +1,22 @@
+unsat
+((set-logic QF_UFLIA)
+(proof
+(let ((?x32 (f x)))
+(let (($x55 (<= ?x32 1)))
+(let ((@x61 (monotonicity (rewrite (= (> ?x32 1) (not $x55))) (= (not (> ?x32 1)) (not (not $x55))))))
+(let ((@x65 (trans @x61 (rewrite (= (not (not $x55)) $x55)) (= (not (> ?x32 1)) $x55))))
+(let ((@x66 (mp (asserted (not (> ?x32 1))) @x65 $x55)))
+(let ((?x47 (+ x (* (- 1) ?x32))))
+(let (($x70 (<= ?x47 (- 1))))
+(let (($x44 (= ?x47 (- 1))))
+(let ((@x48 (rewrite (= (= ?x32 (+ 1 x)) $x44))))
+(let ((?x37 (+ 1 x)))
+(let (($x40 (= ?x32 ?x37)))
+(let ((?x34 (+ x 1)))
+(let (($x35 (= ?x32 ?x34)))
+(let ((@x36 (asserted $x35)))
+(let ((@x79 (unit-resolution ((_ th-lemma arith triangle-eq) (or (not $x44) $x70)) (mp (mp @x36 (rewrite (= $x35 $x40)) $x40) @x48 $x44) $x70)))
+(let (($x28 (not (<= x 0))))
+(let ((@x31 (mp (asserted (> x 0)) (rewrite (= (> x 0) $x28)) $x28)))
+((_ th-lemma arith farkas -1 1 1) @x31 @x79 @x66 false))))))))))))))))))))
+

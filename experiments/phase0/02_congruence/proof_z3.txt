@@ -1,0 +1,8 @@
+unsat
+((set-logic QF_UF)
+(proof
+(let (($x29 (= (f a) (f b))))
+(let (($x30 (not $x29)))
+(let ((@x31 (asserted $x30)))
+(unit-resolution @x31 (monotonicity (asserted (= a b)) $x29) false))))))
+

@@ -58,7 +58,7 @@ def fetch_arxiv(arxiv_id: str) -> str:
     category = primary_cat.get("term", "") if primary_cat is not None else ""
 
     # Build citation key: first author last name + year + first word of title
-    first_last = authors[0].split()[-1].lower()
+    first_last = re.sub(r"[^a-z]", "", authors[0].split()[-1].lower())
     first_word = re.sub(r"[^a-z]", "", title.split()[0].lower())
     key = f"{first_last}{year}{first_word}"
 

@@ -1,0 +1,11 @@
+; Lean goal: example (f : α → α) (a b : α) (h1 : a = b) : f a = f b
+; Encoding: declare uninterpreted sort and function, assert a = b, assert f(a) ≠ f(b)
+(set-logic QF_UF)
+(declare-sort A 0)
+(declare-fun f (A) A)
+(declare-const a A)
+(declare-const b A)
+(assert (= a b))
+(assert (not (= (f a) (f b))))
+(check-sat)
+(get-proof)
